@@ -1,0 +1,39 @@
+grammar used to guide parser development
+
+<PGN-database> ::= <PGN-database><PGN-game>
+                   <empty>
+
+<PGN-game> ::= <tag-section> <element-sequence> <game-termination>
+
+<tag-section> ::= <tag-section> <tag-pair> 
+                  <empty>
+
+
+<tag-pair> ::= [ <tag-name> <tag-value> ]
+<tag-name> ::= <identifier>
+
+<tag-value> ::= <string>
+
+<element-sequence> ::= <element-sequence> <element>
+				       <element-sequence>
+                       <empty>
+
+<element> ::= <move-number-indication>
+              <SAN-move>
+              <numeric-annotation-glyph>
+			  <annotation>
+			  <recursive-variation> 
+
+<move-number-indication> ::= <int>.
+
+<numeric-annotation-glyph> ::= $<int>				  
+			  
+<annotation> ::= { <string> }
+
+<recursive-variation> ::= ( <element-sequence> )
+
+<game-termination> ::= 1-0
+                       0-1
+                       1/2-1/2
+                       *
+<empty> ::=
